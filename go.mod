@@ -4,8 +4,10 @@ go 1.22.6
 
 require (
 	github.com/GuiaBolso/darwin v0.0.0-20191218124601-fd6d2aa3d244
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/julienschmidt/httprouter v1.3.0
+	golang.org/x/crypto v0.26.0
 )
 
 require (

@@ -25,6 +25,11 @@ var (
 						PRIMARY KEY (id)
 					 ) ENGINE=InnoDB CHARACTER SET=utf8;`,
 		},
+		{
+			Version:     2,
+			Description: "Creating table users",
+			Script:      `ALTER TABLE users MODIFY COLUMN password char(60) NOT NULL;`,
+		},
 	}
 )
 

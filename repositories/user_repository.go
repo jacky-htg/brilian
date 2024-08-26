@@ -182,3 +182,28 @@ func (u *UserRepository) List(ctx context.Context, search string) ([]models.User
 
 	return list, nil
 }
+
+func (u *UserRepository) GetByEmail(ctx context.Context) error {
+	switch ctx.Err() {
+	case context.Canceled:
+		return errors.New("request is canceled")
+	case context.DeadlineExceeded:
+		return errors.New("deadline is exceeded")
+	default:
+	}
+
+	const q = `SELECT password FROM users WHERE email=?`
+	stmt, err := u.Db.PrepareContext(ctx, q)
+	if err != nil {
+		u.Log.Println("error get user by email", err)
+		return err
+	}
+	defer stmt.Close()
+
+	err = stmt.QueryRowContext(ctx, u.UserEntity.Email).Scan(&u.UserEntity.Password)
+	if err != nil {
+		u.Log.Println("error get user by email", err)
+		return err
+	}
+	return nil
+}
