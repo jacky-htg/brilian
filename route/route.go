@@ -15,6 +15,8 @@ func InitRoute(db *sql.DB, log *log.Logger) *httprouter.Router {
 
 	router.GET("/users/:id", user.Get)
 	router.POST("/users", user.Create)
+	router.PUT("/users/:id", user.Update)
+	router.DELETE("/users/:id", user.Delete)
 	return router
 
 }
