@@ -20,8 +20,8 @@ func InitRoute(db *sql.DB, log *log.Logger) *httprouter.Router {
 	}
 
 	router.GET("/users", user.List)
-	router.GET("/users/:id", mid.InitMiddleware(middlewares, user.Get))
-	router.POST("/users", mid.InitMiddleware(middlewares, user.Create))
+	router.GET("/users/:id", mid.InitMiddleware(middlewares, user.Get, "/users/:id"))
+	router.POST("/users", mid.InitMiddleware(middlewares, user.Create, "/users"))
 	router.PUT("/users/:id", user.Update)
 	router.DELETE("/users/:id", user.Delete)
 	router.POST("/login", user.Login)

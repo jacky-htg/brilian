@@ -27,7 +27,7 @@ var (
 		},
 		{
 			Version:     2,
-			Description: "Creating table users",
+			Description: "Alter password on  table users",
 			Script:      `ALTER TABLE users MODIFY COLUMN password char(60) NOT NULL;`,
 		},
 	}

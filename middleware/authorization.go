@@ -11,9 +11,8 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func (u *Middleware) AuthorizationMiddleware(next httprouter.Handle) httprouter.Handle {
+func (u *Middleware) AuthorizationMiddleware(next httprouter.Handle, path string) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
 		authHeader := r.Header.Get("Authorization")
 		if authHeader == "" {
 			http.Error(w, "Authorization header missing", http.StatusUnauthorized)

@@ -12,13 +12,13 @@ type Middleware struct {
 	Log *log.Logger
 }
 
-type MiddHandler func(httprouter.Handle) httprouter.Handle
+type MiddHandler func(httprouter.Handle, string) httprouter.Handle
 
-func (u *Middleware) InitMiddleware(mw []MiddHandler, handler httprouter.Handle) httprouter.Handle {
+func (u *Middleware) InitMiddleware(mw []MiddHandler, handler httprouter.Handle, path string) httprouter.Handle {
 	for i := len(mw) - 1; i >= 0; i-- {
 		h := mw[i]
 		if h != nil {
-			handler = h(handler)
+			handler = h(handler, path)
 		}
 	}
 

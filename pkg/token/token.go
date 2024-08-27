@@ -4,13 +4,13 @@ import (
 	"os"
 	"time"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 // MyCustomClaims struct
 type MyCustomClaims struct {
 	Email string `json:"email"`
-	jwt.StandardClaims
+	jwt.RegisteredClaims
 }
 
 var mySigningKey = []byte(os.Getenv("TOKEN_SALT"))
@@ -33,8 +33,8 @@ func ValidateToken(myToken string) (bool, string) {
 func ClaimToken(email string) (string, error) {
 	claims := MyCustomClaims{
 		email,
-		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
+		jwt.RegisteredClaims{
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 1)),
 		},
 	}
 
